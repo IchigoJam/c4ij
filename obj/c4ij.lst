@@ -1,0 +1,114 @@
+
+obj/c4ij.axf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000006c  00000000  00000000  00010000  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_info   00000225  00000000  00000000  0001006c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_abbrev 000000ee  00000000  00000000  00010291  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_loc    000000e4  00000000  00000000  0001037f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000020  00000000  00000000  00010463  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_ranges 00000028  00000000  00000000  00010483  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000055  00000000  00000000  000104ab  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000190  00000000  00000000  00010500  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .comment      0000007f  00000000  00000000  00010690  2**0
+                  CONTENTS, READONLY
+  9 .ARM.attributes 00000031  00000000  00000000  0001070f  2**0
+                  CONTENTS, READONLY
+ 10 .debug_frame  00000034  00000000  00000000  00010740  2**2
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <main>:
+#include <std15.h>
+
+__attribute__ ((section(".main")))
+int main(int param, int ram, int rom, int (*divfunc)()) {
+	cls();
+   0:	23cc      	movs	r3, #204	; 0xcc
+int main(int param, int ram, int rom, int (*divfunc)()) {
+   2:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+	cls();
+   4:	881b      	ldrh	r3, [r3, #0]
+   6:	4798      	blx	r3
+	int x = 15;
+   8:	240f      	movs	r4, #15
+	for (;;) {
+		locate(x, 5);
+   a:	27ce      	movs	r7, #206	; 0xce
+   c:	2605      	movs	r6, #5
+		putc(235);
+   e:	25c4      	movs	r5, #196	; 0xc4
+		locate(x, 5);
+  10:	0031      	movs	r1, r6
+  12:	883b      	ldrh	r3, [r7, #0]
+  14:	0020      	movs	r0, r4
+  16:	4798      	blx	r3
+		putc(235);
+  18:	882b      	ldrh	r3, [r5, #0]
+  1a:	20eb      	movs	r0, #235	; 0xeb
+  1c:	4798      	blx	r3
+		locate(rnd(32), 23);
+  1e:	883b      	ldrh	r3, [r7, #0]
+  20:	2020      	movs	r0, #32
+  22:	9301      	str	r3, [sp, #4]
+  24:	23c0      	movs	r3, #192	; 0xc0
+  26:	881b      	ldrh	r3, [r3, #0]
+  28:	4798      	blx	r3
+  2a:	2117      	movs	r1, #23
+  2c:	9b01      	ldr	r3, [sp, #4]
+  2e:	4798      	blx	r3
+		putc('*');
+  30:	882b      	ldrh	r3, [r5, #0]
+  32:	202a      	movs	r0, #42	; 0x2a
+  34:	4798      	blx	r3
+		putc(10);
+  36:	882b      	ldrh	r3, [r5, #0]
+  38:	200a      	movs	r0, #10
+  3a:	4798      	blx	r3
+		wait(3);
+  3c:	23d6      	movs	r3, #214	; 0xd6
+  3e:	2003      	movs	r0, #3
+  40:	881b      	ldrh	r3, [r3, #0]
+  42:	4798      	blx	r3
+		
+		int c = inkey();
+  44:	23ca      	movs	r3, #202	; 0xca
+  46:	881b      	ldrh	r3, [r3, #0]
+  48:	4798      	blx	r3
+		if (c == KEY_LEFT)
+  4a:	281c      	cmp	r0, #28
+  4c:	d109      	bne.n	62 <main+0x62>
+			x--;
+  4e:	3c01      	subs	r4, #1
+		if (c == KEY_RIGHT)
+			x++;
+		if (scr(x, 5))
+  50:	23d0      	movs	r3, #208	; 0xd0
+  52:	0031      	movs	r1, r6
+  54:	881b      	ldrh	r3, [r3, #0]
+  56:	0020      	movs	r0, r4
+  58:	4798      	blx	r3
+  5a:	2800      	cmp	r0, #0
+  5c:	d0d7      	beq.n	e <main+0xe>
+			break;
+	}
+	return x;
+}
+  5e:	0020      	movs	r0, r4
+  60:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+			x++;
+  62:	381d      	subs	r0, #29
+  64:	4243      	negs	r3, r0
+  66:	4158      	adcs	r0, r3
+  68:	1824      	adds	r4, r4, r0
+  6a:	e7f1      	b.n	50 <main+0x50>
