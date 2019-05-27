@@ -29,8 +29,8 @@ typedef uint32_t (*IJFUNC_P2R)(uint32_t x, uint32_t y);
 #define ana() ((IJFUNC_P0R)(void*)(uint32_t)*(uint16_t*)0xDE)()
 #define uputc(n) ((IJFUNC_P1)(void*)(uint32_t)*(uint16_t*)0xD6)((n))
 
-#define KEY_LEFT 28
-#define KEY_RIGHT 29
-#define KEY_UP 30
-#define KEY_DOWN 31
-#define KEY_SPACE 32
+#define LEFT 28
+#define RIGHT 29
+#define UP 30
+#define DOWN 31
+#define SPACE 32

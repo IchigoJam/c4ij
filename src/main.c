@@ -13,9 +13,9 @@ int main(int param, int ram, int rom, int (*divfunc)()) {
 		wait(3);
 		
 		int c = inkey();
-		if (c == KEY_LEFT)
+		if (c == LEFT)
 			x--;
-		if (c == KEY_RIGHT)
+		if (c == RIGHT)
 			x++;
 		if (scr(x, 5))
 			break;
