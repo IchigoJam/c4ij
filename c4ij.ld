@@ -1,8 +1,8 @@
-/* IchigoJam Memory Definitions */
+/* c4ij memory definitions */
 
 MEMORY {
-  /* Flash: 1k */
-  ROM (rx) : ORIGIN = 0x00000000, LENGTH = 1k
+  /* PROG: 512 #700-#8FF */
+  PROG (rx) : ORIGIN = 0x00000000, LENGTH = 512
   /* SRAM: 1k?? */
   RAM (w)  : ORIGIN = 0x10000000, LENGTH = 1k
 }
@@ -10,5 +10,5 @@ MEMORY {
 SECTIONS {
    .text : {
     KEEP(*(.main))
-  } > ROM
+  } > PROG
 }

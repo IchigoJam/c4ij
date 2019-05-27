@@ -6,7 +6,7 @@ int main(int param, int ram, int rom, int (*divfunc)()) {
 	int x = 15;
 	for (;;) {
 		locate(x, 5);
-		putc(235);
+		putc('O');
 		locate(rnd(32), 23);
 		putc('*');
 		putc(10);

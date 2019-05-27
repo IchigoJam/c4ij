@@ -46,16 +46,16 @@ int main(int param, int ram, int rom, int (*divfunc)()) {
 		locate(x, 5);
    a:	27ce      	movs	r7, #206	; 0xce
    c:	2605      	movs	r6, #5
-		putc(235);
+		putc('O');
    e:	25c4      	movs	r5, #196	; 0xc4
 		locate(x, 5);
   10:	0031      	movs	r1, r6
   12:	883b      	ldrh	r3, [r7, #0]
   14:	0020      	movs	r0, r4
   16:	4798      	blx	r3
-		putc(235);
+		putc('O');
   18:	882b      	ldrh	r3, [r5, #0]
-  1a:	20eb      	movs	r0, #235	; 0xeb
+  1a:	204f      	movs	r0, #79	; 0x4f
   1c:	4798      	blx	r3
 		locate(rnd(32), 23);
   1e:	883b      	ldrh	r3, [r7, #0]
