@@ -4,6 +4,7 @@ c4ij - C language for IchigoJam!
 
 Let's make BASIC program in C language on your PC!  
 This tool provide to convert IchigoJam BASIC to bin file.  
+* Only IchigoJam 1.3.2b12 or higher for LPC1114  
 
 ## Minimum example
 
