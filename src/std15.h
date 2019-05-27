@@ -15,7 +15,7 @@ typedef uint32_t (*IJFUNC_P2R)(uint32_t x, uint32_t y);
 #define sin(n) ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xC2)((n))
 #define putc(n) ((IJFUNC_P1)(void*)(uint32_t)*(uint16_t*)0xC4)((n))
 #define putnum(n) ((IJFUNC_P1)(void*)(uint32_t)*(uint16_t*)0xC6)((n))
-#define putstr(p) ((IJFUNC_P1S)(void*)(uint32_t)*(uint16_t*)0xC6)((p))
+#define putstr(p) ((IJFUNC_P1S)(void*)(uint32_t)*(uint16_t*)0xC8)((p))
 #define inkey() ((IJFUNC_P0R)(void*)(uint32_t)*(uint16_t*)0xCA)()
 #define cls() ((IJFUNC_P0)(void*)(uint32_t)*(uint16_t*)0xCC)()
 #define locate(x, y) ((IJFUNC_P2)(void*)(uint32_t)*(uint16_t*)0xCE)((x), (y))
@@ -26,8 +26,15 @@ typedef uint32_t (*IJFUNC_P2R)(uint32_t x, uint32_t y);
 #define out(x, y) ((IJFUNC_P2)(void*)(uint32_t)*(uint16_t*)0xD8)((x), (y))
 #define in() ((IJFUNC_P0R)(void*)(uint32_t)*(uint16_t*)0xDA)()
 #define pwm(x, y, z) ((IJFUNC_P3)(void*)(uint32_t)*(uint16_t*)0xDC)((x), (y), (z))
-#define ana() ((IJFUNC_P0R)(void*)(uint32_t)*(uint16_t*)0xDE)()
-#define uputc(n) ((IJFUNC_P1)(void*)(uint32_t)*(uint16_t*)0xD6)((n))
+#define ana() ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xDE)((n))
+#define uputc(n) ((IJFUNC_P1)(void*)(uint32_t)*(uint16_t*)0xE0)((n))
+
+typedef void (*IJFUNC_MEMCLEAR)(void* dst, int len);
+#define memclear(dst, len) ((IJFUNC_MEMCLEAR)(void*)(uint32_t)*(uint16_t*)0xE4)((dst), (len))
+
+typedef void (*IJFUNC_MEMCPY)(void* dst, void* src, int len);
+#define memcpy(dst, src, len) ((IJFUNC_MEMCPY)(void*)(uint32_t)*(uint16_t*)0xE6)((dst), (src), (len))
+
 
 #define LEFT 28
 #define RIGHT 29
