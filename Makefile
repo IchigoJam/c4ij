@@ -11,6 +11,8 @@ OBJDUMP = arm-none-eabi-objdump
 SIZE    = arm-none-eabi-size
 NM      = arm-none-eabi-nm
 BIN2BAS = ./bin2bas
+#BIN2BAS = ./bin2bas --startaddress 3328
+BIN2BAS = ./bin2bas --nolineno --startaddress 3328 # 0xd00
 
 # Optimization (0, 1, 2, 3, 4, s)
 OPTIMIZE = s
