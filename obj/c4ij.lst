@@ -3,209 +3,112 @@ obj/c4ij.axf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000000e8  00000000  00000000  00010000  2**2
+  0 .text         0000006c  00000000  00000000  00010000  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .debug_info   0000066c  00000000  00000000  000100e8  2**0
+  1 .debug_info   00000233  00000000  00000000  0001006c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  2 .debug_abbrev 00000170  00000000  00000000  00010754  2**0
+  2 .debug_abbrev 000000ee  00000000  00000000  0001029f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_loc    00000118  00000000  00000000  000108c4  2**0
+  3 .debug_loc    000000e4  00000000  00000000  0001038d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_aranges 00000020  00000000  00000000  000109dc  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00010471  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_ranges 00000030  00000000  00000000  000109fc  2**0
+  5 .debug_ranges 00000028  00000000  00000000  00010491  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   00000094  00000000  00000000  00010a2c  2**0
+  6 .debug_line   00000055  00000000  00000000  000104b9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_str    00000527  00000000  00000000  00010ac0  2**0
+  7 .debug_str    00000199  00000000  00000000  0001050e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .comment      0000007f  00000000  00000000  00010fe7  2**0
+  8 .comment      0000007f  00000000  00000000  000106a7  2**0
                   CONTENTS, READONLY
-  9 .ARM.attributes 00000031  00000000  00000000  00011066  2**0
+  9 .ARM.attributes 00000031  00000000  00000000  00010726  2**0
                   CONTENTS, READONLY
- 10 .debug_frame  00000034  00000000  00000000  00011098  2**2
+ 10 .debug_frame  00000034  00000000  00000000  00010758  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <main>:
-static const uint8_t PS2_KB_MAP_US[] = {
-0x00,0x00,0x60,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x60,0x20,0x20,0x20,0x20,0x20,0x20,0x71,0x31,0x20,0x20,0x20,0x7a,0x73,0x61,0x77,0x32,0x20,0x20,0x63,0x78,0x64,0x65,0x34,0x33,0x20,0x20,0x20,0x76,0x66,0x74,0x72,0x35,0x20,0x20,0x6e,0x62,0x68,0x67,0x79,0x36,0x20,0x20,0x20,0x6d,0x6a,0x75,0x37,0x38,0x20,0x20,0x2c,0x6b,0x69,0x6f,0x30,0x39,0x20,0x20,0x2e,0x2f,0x6c,0x3b,0x70,0x2d,0x20,0x20,0x5c,0x27,0x20,0x5b,0x3d,0x20,0x20,0x20,0x20,0x0a,0x5d,0x20,0x5c,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x08,0x20,0x20,0x31,0x20,0x34,0x37,0x20,0x20,0x20,0x30,0x2e,0x32,0x35,0x36,0x38,0x20,0x20,0x20,0x2b,0x33,0x2d,0x2a,0x39,0x00,0x7e,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x7e,0x20,0x20,0x20,0x20,0x20,0x20,0x51,0x21,0x20,0x20,0x20,0x5a,0x53,0x41,0x57,0x40,0x20,0x20,0x43,0x58,0x44,0x45,0x24,0x23,0x20,0x20,0x20,0x56,0x46,0x54,0x52,0x25,0x20,0x20,0x4e,0x42,0x48,0x47,0x59,0x5e,0x20,0x20,0x20,0x4d,0x4a,0x55,0x26,0x2a,0x20,0x20,0x3c,0x4b,0x49,0x4f,0x29,0x28,0x20,0x20,0x3e,0x3f,0x4c,0x3a,0x50,0x5f,0x20,0x20,0x5f,0x22,0x20,0x7b,0x2b,0x20,0x20,0x20,0x20,0x0a,0x7d,0x20,0x7c,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x08,0x20,0x20,0x31,0x20,0x34,0x37,0x20,0x20,0x20,0x30,0x2e,0x32,0x35,0x36,0x38,0x20,0x20,0x20,0x2b,0x33,0x2d,0x2a,0x39,0x00,
-};
+#include <std15.h>
 
 __attribute__ ((section(".main")))
 int main(int param, int ram, int rom, int (*divfunc)()) {
-   0:	b5f0      	push	{r4, r5, r6, r7, lr}
-   2:	b0c3      	sub	sp, #268	; 0x10c
-   4:	9101      	str	r1, [sp, #4]
-	IAPRESULT_INVALID_STOP_BIT,
-	IAPRESULT_CODE_READ_PROTECTION_ENABLED,
-};
-
-static inline void enable_irq()		{ __asm volatile ("cpsie i"); }
-static inline void disable_irq()	{ __asm volatile ("cpsid i"); }
-   6:	b672      	cpsid	i
-	int res;
-	uint8_t buf[0x100];
-
-	// PS/2キーボードマップ変更
-	disable_irq();
-	int sec = flash_blankCheck(6, 6) == IAPRESULT_CMD_SUCCESS ? 6 : 7;
-   8:	2206      	movs	r2, #6
-   a:	23e8      	movs	r3, #232	; 0xe8
-   c:	0011      	movs	r1, r2
-   e:	881b      	ldrh	r3, [r3, #0]
-  10:	2035      	movs	r0, #53	; 0x35
-  12:	4798      	blx	r3
-  14:	0004      	movs	r4, r0
-  16:	1e60      	subs	r0, r4, #1
-  18:	4184      	sbcs	r4, r0
-//			src = PS2_KB_MAP_US;
-			//memcpy(buf, (void*)PS2_KB_MAP_US, 0x100);
-			//memcpy(buf, PS2_KB_MAP_JP, 0x100);
-			memcpy(buf, (uint8_t*)(ram + 0xf00), 0x100);
-		} else {
-			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
-  1a:	2780      	movs	r7, #128	; 0x80
-	for (int i = 0; i < 16; i++) {
-  1c:	2500      	movs	r5, #0
-	int sec = flash_blankCheck(6, 6) == IAPRESULT_CMD_SUCCESS ? 6 : 7;
-  1e:	3406      	adds	r4, #6
-//			src = buf;
-		}
-		flash_prepare(sec, sec);
-//		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), src, 0x100); // 256byteずつ
-		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
-  20:	0123      	lsls	r3, r4, #4
-  22:	9300      	str	r3, [sp, #0]
-			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
-  24:	007f      	lsls	r7, r7, #1
-  26:	23e6      	movs	r3, #230	; 0xe6
-  28:	881b      	ldrh	r3, [r3, #0]
-		if (i == 7) { // keymap のみ変更
-  2a:	2d07      	cmp	r5, #7
-  2c:	d155      	bne.n	da <main+0xda>
-			memcpy(buf, (uint8_t*)(ram + 0xf00), 0x100);
-  2e:	20f0      	movs	r0, #240	; 0xf0
-  30:	003a      	movs	r2, r7
-  32:	9901      	ldr	r1, [sp, #4]
-  34:	0100      	lsls	r0, r0, #4
-  36:	1809      	adds	r1, r1, r0
-			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
-  38:	a802      	add	r0, sp, #8
+	cls();
+   0:	23cc      	movs	r3, #204	; 0xcc
+int main(int param, int ram, int rom, int (*divfunc)()) {
+   2:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+	cls();
+   4:	881b      	ldrh	r3, [r3, #0]
+   6:	4798      	blx	r3
+	int x = 15;
+   8:	240f      	movs	r4, #15
+	for (;;) {
+		locate(x, 5);
+   a:	27ce      	movs	r7, #206	; 0xce
+   c:	2605      	movs	r6, #5
+		putc('O');
+   e:	25c4      	movs	r5, #196	; 0xc4
+		locate(x, 5);
+  10:	0031      	movs	r1, r6
+  12:	883b      	ldrh	r3, [r7, #0]
+  14:	0020      	movs	r0, r4
+  16:	4798      	blx	r3
+		putc('O');
+  18:	882b      	ldrh	r3, [r5, #0]
+  1a:	204f      	movs	r0, #79	; 0x4f
+  1c:	4798      	blx	r3
+		locate(rnd(32), 23);
+  1e:	883b      	ldrh	r3, [r7, #0]
+  20:	2020      	movs	r0, #32
+  22:	9301      	str	r3, [sp, #4]
+  24:	23c0      	movs	r3, #192	; 0xc0
+  26:	881b      	ldrh	r3, [r3, #0]
+  28:	4798      	blx	r3
+  2a:	2117      	movs	r1, #23
+  2c:	9b01      	ldr	r3, [sp, #4]
+  2e:	4798      	blx	r3
+		putc('*');
+  30:	882b      	ldrh	r3, [r5, #0]
+  32:	202a      	movs	r0, #42	; 0x2a
+  34:	4798      	blx	r3
+		putc(10);
+  36:	882b      	ldrh	r3, [r5, #0]
+  38:	200a      	movs	r0, #10
   3a:	4798      	blx	r3
-		flash_prepare(sec, sec);
-  3c:	23e8      	movs	r3, #232	; 0xe8
-  3e:	0022      	movs	r2, r4
+		wait(3);
+  3c:	23d6      	movs	r3, #214	; 0xd6
+  3e:	2003      	movs	r0, #3
   40:	881b      	ldrh	r3, [r3, #0]
-  42:	0021      	movs	r1, r4
-  44:	2032      	movs	r0, #50	; 0x32
-  46:	4798      	blx	r3
-		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
-  48:	9b00      	ldr	r3, [sp, #0]
-  4a:	a902      	add	r1, sp, #8
-  4c:	18ea      	adds	r2, r5, r3
-  4e:	23ea      	movs	r3, #234	; 0xea
-  50:	881b      	ldrh	r3, [r3, #0]
-  52:	0212      	lsls	r2, r2, #8
-  54:	001e      	movs	r6, r3
-  56:	2033      	movs	r0, #51	; 0x33
-  58:	003b      	movs	r3, r7
-	for (int i = 0; i < 16; i++) {
-  5a:	3501      	adds	r5, #1
-		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
-  5c:	47b0      	blx	r6
-	for (int i = 0; i < 16; i++) {
-  5e:	2d10      	cmp	r5, #16
-  60:	d1e1      	bne.n	26 <main+0x26>
+  42:	4798      	blx	r3
+		
+		int c = inkey();
+  44:	23ca      	movs	r3, #202	; 0xca
+  46:	881b      	ldrh	r3, [r3, #0]
+  48:	4798      	blx	r3
+		if (c == LEFT)
+  4a:	281c      	cmp	r0, #28
+  4c:	d109      	bne.n	62 <main+0x62>
+			x--;
+  4e:	3c01      	subs	r4, #1
+		if (c == RIGHT)
+			x++;
+		if (scr(x, 5))
+  50:	23d0      	movs	r3, #208	; 0xd0
+  52:	0031      	movs	r1, r6
+  54:	881b      	ldrh	r3, [r3, #0]
+  56:	0020      	movs	r0, r4
+  58:	4798      	blx	r3
+  5a:	2800      	cmp	r0, #0
+  5c:	d0d7      	beq.n	e <main+0xe>
+			break;
 	}
-
-	// erase sector5
-	flash_prepare(sec5, sec5);
-  62:	2205      	movs	r2, #5
-  64:	35d8      	adds	r5, #216	; 0xd8
-  66:	882b      	ldrh	r3, [r5, #0]
-  68:	0011      	movs	r1, r2
-  6a:	2032      	movs	r0, #50	; 0x32
-  6c:	4798      	blx	r3
-	flash_erase(sec5, sec5);
-  6e:	2205      	movs	r2, #5
-  70:	882b      	ldrh	r3, [r5, #0]
-  72:	25a0      	movs	r5, #160	; 0xa0
-  74:	0011      	movs	r1, r2
-  76:	2034      	movs	r0, #52	; 0x34
-  78:	4798      	blx	r3
-  7a:	9b00      	ldr	r3, [sp, #0]
-  7c:	01ed      	lsls	r5, r5, #7
-  7e:	021b      	lsls	r3, r3, #8
-  80:	9300      	str	r3, [sp, #0]
-
-	// copy sec -> sector5
-	for (int i = 0; i < 16; i++) {
-		memcpy(buf, (void*)(sec * 0x1000 + 0x100 * i), 0x100);
-  82:	9b00      	ldr	r3, [sp, #0]
-  84:	4a17      	ldr	r2, [pc, #92]	; (e4 <main+0xe4>)
-  86:	a802      	add	r0, sp, #8
-  88:	1899      	adds	r1, r3, r2
-  8a:	23e6      	movs	r3, #230	; 0xe6
-  8c:	2280      	movs	r2, #128	; 0x80
-  8e:	1949      	adds	r1, r1, r5
-  90:	881b      	ldrh	r3, [r3, #0]
-  92:	0052      	lsls	r2, r2, #1
-  94:	4798      	blx	r3
-		flash_prepare(sec5, sec5);
-  96:	26e8      	movs	r6, #232	; 0xe8
-  98:	2205      	movs	r2, #5
-  9a:	8833      	ldrh	r3, [r6, #0]
-  9c:	0011      	movs	r1, r2
-  9e:	2032      	movs	r0, #50	; 0x32
-  a0:	4798      	blx	r3
-		flash_copyRAMtoFlash((uint8_t*)(sec5 * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
-  a2:	23ea      	movs	r3, #234	; 0xea
-  a4:	881b      	ldrh	r3, [r3, #0]
-  a6:	002a      	movs	r2, r5
-  a8:	001f      	movs	r7, r3
-  aa:	2380      	movs	r3, #128	; 0x80
-  ac:	a902      	add	r1, sp, #8
-  ae:	005b      	lsls	r3, r3, #1
-  b0:	2033      	movs	r0, #51	; 0x33
-  b2:	47b8      	blx	r7
-	for (int i = 0; i < 16; i++) {
-  b4:	23c0      	movs	r3, #192	; 0xc0
-  b6:	3501      	adds	r5, #1
-  b8:	35ff      	adds	r5, #255	; 0xff
-  ba:	01db      	lsls	r3, r3, #7
-  bc:	429d      	cmp	r5, r3
-  be:	d1e0      	bne.n	82 <main+0x82>
-	}
-
-	// erase sec
-	flash_prepare(sec, sec);
-  c0:	8833      	ldrh	r3, [r6, #0]
-  c2:	0022      	movs	r2, r4
-  c4:	0021      	movs	r1, r4
-  c6:	2032      	movs	r0, #50	; 0x32
-  c8:	4798      	blx	r3
-	res = flash_erase(sec, sec);
-  ca:	8833      	ldrh	r3, [r6, #0]
-  cc:	0022      	movs	r2, r4
-  ce:	0021      	movs	r1, r4
-  d0:	2034      	movs	r0, #52	; 0x34
-  d2:	4798      	blx	r3
-static inline void enable_irq()		{ __asm volatile ("cpsie i"); }
-  d4:	b662      	cpsie	i
-		return 1;
-	}
-	*/
-
-//	return sec;
+	return x;
 }
-  d6:	b043      	add	sp, #268	; 0x10c
-  d8:	bdf0      	pop	{r4, r5, r6, r7, pc}
-			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
-  da:	0029      	movs	r1, r5
-  dc:	3150      	adds	r1, #80	; 0x50
-  de:	0209      	lsls	r1, r1, #8
-  e0:	003a      	movs	r2, r7
-  e2:	e7a9      	b.n	38 <main+0x38>
-  e4:	ffffb000 	.word	0xffffb000
+  5e:	0020      	movs	r0, r4
+  60:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+			x++;
+  62:	381d      	subs	r0, #29
+  64:	4243      	negs	r3, r0
+  66:	4158      	adcs	r0, r3
+  68:	1824      	adds	r4, r4, r0
+  6a:	e7f1      	b.n	50 <main+0x50>

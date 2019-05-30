@@ -10,9 +10,9 @@ OBJCOPY = arm-none-eabi-objcopy
 OBJDUMP = arm-none-eabi-objdump
 SIZE    = arm-none-eabi-size
 NM      = arm-none-eabi-nm
-BIN2BAS = ./bin2bas
-#BIN2BAS = ./bin2bas --startaddress 3328
-BIN2BAS = ./bin2bas --nolineno --startaddress 3328 # 0xd00
+BIN2BAS = ./bin2bas # default 0x700
+#BIN2BAS = ./bin2bas --startaddress 2048 # 0x800 for expcg
+#BIN2BAS = ./bin2bas --nolineno --startaddress 3328 # 0xd00 for exchg
 
 # Optimization (0, 1, 2, 3, 4, s)
 OPTIMIZE = s
