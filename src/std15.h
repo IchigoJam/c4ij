@@ -17,6 +17,7 @@ typedef uint32_t (*IJFUNC_P3R)(uint32_t x, uint32_t y, uint32_t z);
 typedef void (*IJFUNC_MEMCLEAR)(uint8_t* dst, int len);
 typedef void (*IJFUNC_MEMCPY)(uint8_t* dst, const uint8_t* src, int len);
 typedef uint32_t (*IJFUNC_FLASH2)(uint32_t cmd, const uint8_t* src, uint8_t* dst, uint32_t len);
+typedef void (*IJFUNC_WS_LED)(uint32_t gpiomask, const uint8_t* data, uint32_t len, uint32_t skip);
 
 #define rnd(n) ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xC0)((n))
 #define sin(n) ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xC2)((n))
@@ -39,6 +40,7 @@ typedef uint32_t (*IJFUNC_FLASH2)(uint32_t cmd, const uint8_t* src, uint8_t* dst
 #define memcpy(dst, src, len) ((IJFUNC_MEMCPY)(void*)(uint32_t)*(uint16_t*)0xE6)((dst), (src), (len))
 #define flash1(cmd, startsector, endsector) ((IJFUNC_P3R)(void*)(uint32_t)*(uint16_t*)0xE8)((cmd), (startsector), (endsector))
 #define flash2(cmd, dst, src, len) ((IJFUNC_FLASH2)(void*)(uint32_t)*(uint16_t*)0xEA)((cmd), (src), (dst), (len))
+#define ws_led(gpiomask, data, len, skip) ((IJFUNC_WS_LED)(void*)(uint32_t)*(uint16_t*)0xEE)((gpiomask), (data), (len), (skip))
 
 enum IAP_command {
 	IAPCommand_Prepare_sector_for_write_operation = 50,
@@ -92,3 +94,5 @@ static inline void disable_irq()	{ __asm volatile ("cpsid i"); }
 #define UP 30
 #define DOWN 31
 #define SPACE 32
+
+#define GPIO1_0 0x50010004
