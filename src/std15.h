@@ -1,9 +1,11 @@
-typedef unsigned int uint32_t;
-typedef int int32_t;
-typedef unsigned short uint16_t;
-typedef short int16_t;
 typedef unsigned char uint8_t;
 typedef signed char int8_t;
+typedef unsigned short uint16_t;
+typedef short int16_t;
+typedef unsigned int uint32_t;
+typedef int int32_t;
+typedef unsigned long long uint64_t;
+typedef long long  int64_t;
 
 typedef void (*IJFUNC_P0)();
 typedef void (*IJFUNC_P1)(uint32_t n);
@@ -17,7 +19,7 @@ typedef uint32_t (*IJFUNC_P3R)(uint32_t x, uint32_t y, uint32_t z);
 typedef void (*IJFUNC_MEMCLEAR)(uint8_t* dst, int len);
 typedef void (*IJFUNC_MEMCPY)(uint8_t* dst, const uint8_t* src, int len);
 typedef uint32_t (*IJFUNC_FLASH2)(uint32_t cmd, const uint8_t* src, uint8_t* dst, uint32_t len);
-typedef void (*IJFUNC_WS_LED)(uint32_t gpiomask, const uint8_t* data, uint32_t len, uint32_t skip);
+typedef void (*IJFUNC_WS_LED)(uint32_t countrepeat, const uint8_t* data, uint32_t gpiomask);
 
 #define rnd(n) ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xC0)((n))
 #define sin(n) ((IJFUNC_P1R)(void*)(uint32_t)*(uint16_t*)0xC2)((n))
@@ -40,7 +42,7 @@ typedef void (*IJFUNC_WS_LED)(uint32_t gpiomask, const uint8_t* data, uint32_t l
 #define memcpy(dst, src, len) ((IJFUNC_MEMCPY)(void*)(uint32_t)*(uint16_t*)0xE6)((dst), (src), (len))
 #define flash1(cmd, startsector, endsector) ((IJFUNC_P3R)(void*)(uint32_t)*(uint16_t*)0xE8)((cmd), (startsector), (endsector))
 #define flash2(cmd, dst, src, len) ((IJFUNC_FLASH2)(void*)(uint32_t)*(uint16_t*)0xEA)((cmd), (src), (dst), (len))
-#define ws_led(gpiomask, data, len, skip) ((IJFUNC_WS_LED)(void*)(uint32_t)*(uint16_t*)0xEE)((gpiomask), (data), (len), (skip))
+#define ws_led(countrepeat, data, gpiomask) ((IJFUNC_WS_LED)(void*)(uint32_t)*(uint16_t*)0xEE)((countrepeat), (data), (gpiomask))
 
 enum IAP_command {
 	IAPCommand_Prepare_sector_for_write_operation = 50,
@@ -95,4 +97,9 @@ static inline void disable_irq()	{ __asm volatile ("cpsid i"); }
 #define DOWN 31
 #define SPACE 32
 
-#define GPIO1_0 0x50010004
+#define GPIO1 0x50010000
+#define GPIO_OUT1	(GPIO1 + (1 << (0 + 2))) // OUT1 = 0x50010004
+#define GPIO_OUT2	(GPIO1 + (1 << (1 + 2)))
+#define GPIO_OUT3	(GPIO1 + (1 << (2 + 2)))
+#define GPIO_OUT4	(GPIO1 + (1 << (3 + 2)))
+#define GPIO_LED	(GPIO1 + (1 << (5 + 2))) // LED

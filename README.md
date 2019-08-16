@@ -2,9 +2,12 @@
 
 c4ij - C language for IchigoJam!
 
-Let's make BASIC program in C language on your PC!  
+Let's make programs with C language on your PC!  
 This tool provide to convert IchigoJam BASIC to bin file.  
-* Only IchigoJam 1.3.2b12 or higher for LPC1114  
+* Only IchigoJam 1.4b9 or higher for LPC1114  
+
+see also  
+https://fukuno.jig.jp/2580  
 
 ## Minimum example
 
@@ -12,22 +15,36 @@ This tool provide to convert IchigoJam BASIC to bin file.
 #include <std15.h>  
 
 __attribute__ ((section(".main")))  
-int main(int param, int ram, int rom, int (*divfunc)()) {  
+int main(int param, int ram, int rom, uint64_t (*divfunc)()) {  
 	return rnd(x);  
 }  
 ```
 
 ## How to use
 
+In the beginning. Edit settings on Makefile for your environment.  
+
+There are 2 methods  
+ 1. bin file to POKE commands. max 512byte  
+ 2. pack the bin file to wirte to Flash. max 3kbyte or 7kbyte  
+
 Edit src/main.c  
 Check commands with src/std15.h  
+* warning! const resource can't use only 7kbyte flash mode  
 
 ```
-$ make  
+$ make poke
 ```
 
 Send POKE commands to IchigoJam. (main.bas)  
 And ?USR(#700,0) to go!  
+
+```
+$ make write
+```
+
+Run on your IchigoJam rapidly!
+
 
 ## Kawakudari example
 

@@ -1,7 +1,7 @@
-PROJECT	= c4ij
-
 CSRC	= main.c
 ASRC	=
+
+PROJECT	= c4ij
 
 # Programs to build porject
 # https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads
@@ -11,6 +11,7 @@ OBJDUMP = arm-none-eabi-objdump
 SIZE    = arm-none-eabi-size
 NM      = arm-none-eabi-nm
 BIN2BAS = ./bin2bas # default 0x700
+BAS2BIN = ./bas2bin
 #BIN2BAS = ./bin2bas --startaddress 2048 # 0x800 for expcg
 #BIN2BAS = ./bin2bas --nolineno --startaddress 3328 # 0xd00 for exchg
 
@@ -146,8 +147,6 @@ sym: $(PROJECT).sym
 size:
 	$(SIZE) $(PROJECT).axf
 	ls -l $(PROJECT).bin
-	$(BIN2BAS) $(PROJECT).bin > main.bas
-	cat main.bas
 
 %.axf:  $(AOBJARM) $(AOBJ) $(COBJARM) $(COBJ)
 	@echo
@@ -183,9 +182,14 @@ dasm:
 #	cat $(PROJECT).bin >> $(OBJDIR)/ij.bin
 #	$(LPC21ISP) -control -bin $(OBJDIR)/ij.bin $(USBSERIAL) 115200 1200
 
-#write:
-#	cp $(ICHIGOJAM_BIN) $(OBJDIR)/ij.bin
-#	cat $(PROJECT).bin >> $(OBJDIR)/ij.bin
-#	$(LPC21ISP) -control -bin $(OBJDIR)/ij.bin $(USBSERIAL) 115200 1200
+write: build
+	echo "1 @ARUN:POKE#700,3,180,4,73,8,104,64,28,0,209,3,73,1,49,140,70,3,188,96,71,0,100,0,0,0,116,0,0:?USR(#700):END" > entry.bas
+	$(BAS2BIN) entry.bas entry.bin
+	cat entry.bin obj/c4ij.bin > sector6.bin
+	$(LPC21ISP) -control -bin -sector6 sector6.bin $(USBSERIAL) 115200 1200
+
+poke: build
+	$(BIN2BAS) $(PROJECT).bin > main.bas
+	cat main.bas
 
 -include $(shell mkdir $(OBJDIR) 2>/dev/null) $(wildcard $(OBJDIR)/*.d)
