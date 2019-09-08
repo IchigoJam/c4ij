@@ -11,12 +11,13 @@
 170 IFD=5G=F:B=E
 180 RTN
 */
-void hsv2rgb(int h, int s, int v, uint8_t* grb, uint64_t (*divfunc)()) {
+static void hsv2rgb(int h, int s, int v, uint8_t* grb, uint64_t (*divfunc)()) {
 	int r = v, g = v, b = v;
 	if (s == 0)
 		return;
-	int d = divfunc((uint32_t)divfunc(h, 60), 6) >> 32;
-	int hmod60 = divfunc(h, 60) >> 32;
+	uint64_t hmoddiv60 = divfunc(h, 60);
+	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
+	int hmod60 = hmoddiv60 >> 32;
 	int c = v - (uint32_t)divfunc((59 - hmod60) * v * s, 6000);
 	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
 	int f = (uint32_t)divfunc(v * (100 - s), 100);

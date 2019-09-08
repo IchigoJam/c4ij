@@ -3,42 +3,198 @@ obj/c4ij.axf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000000a  00006400  00006400  00006400  2**1
+  0 .text         000000e4  00006400  00006400  00006400  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .debug_info   0000011a  00000000  00000000  0000640a  2**0
+  1 .debug_info   0000035e  00000000  00000000  000064e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  2 .debug_abbrev 000000af  00000000  00000000  00006524  2**0
+  2 .debug_abbrev 00000160  00000000  00000000  00006842  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_loc    00000084  00000000  00000000  000065d3  2**0
+  3 .debug_loc    00000339  00000000  00000000  000069a2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_aranges 00000020  00000000  00000000  00006657  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00006cdb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_ranges 00000010  00000000  00000000  00006677  2**0
+  5 .debug_ranges 00000048  00000000  00000000  00006cfb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   00000047  00000000  00000000  00006687  2**0
+  6 .debug_line   000000c5  00000000  00000000  00006d43  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_str    00000193  00000000  00000000  000066ce  2**0
+  7 .debug_str    000001c2  00000000  00000000  00006e08  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .comment      0000007f  00000000  00000000  00006861  2**0
+  8 .comment      0000007f  00000000  00000000  00006fca  2**0
                   CONTENTS, READONLY
-  9 .ARM.attributes 00000031  00000000  00000000  000068e0  2**0
+  9 .ARM.attributes 00000031  00000000  00000000  00007049  2**0
                   CONTENTS, READONLY
- 10 .debug_frame  00000028  00000000  00000000  00006914  2**2
+ 10 .debug_frame  00000030  00000000  00000000  0000707c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00006400 <main>:
-#include <std15.h>
 
 __attribute__ ((section(".main")))
 int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
-	return rnd(param);
-    6400:	23c0      	movs	r3, #192	; 0xc0
+	const int v = 50;
+	const int n = 20;
+	uint8_t* grb = (uint8_t*)(ram + 0x800);
+    6400:	2280      	movs	r2, #128	; 0x80
 int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
-    6402:	b510      	push	{r4, lr}
-	return rnd(param);
-    6404:	881b      	ldrh	r3, [r3, #0]
-    6406:	4798      	blx	r3
+    6402:	b5f0      	push	{r4, r5, r6, r7, lr}
+	uint8_t* grb = (uint8_t*)(ram + 0x800);
+    6404:	0112      	lsls	r2, r2, #4
+int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
+    6406:	b089      	sub	sp, #36	; 0x24
+    6408:	9301      	str	r3, [sp, #4]
+	uint8_t* grb = (uint8_t*)(ram + 0x800);
+    640a:	4694      	mov	ip, r2
+    640c:	000b      	movs	r3, r1
+    640e:	4463      	add	r3, ip
+    6410:	9305      	str	r3, [sp, #20]
+	int h = 0;
+    6412:	2300      	movs	r3, #0
+int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
+    6414:	9106      	str	r1, [sp, #24]
+    6416:	4a30      	ldr	r2, [pc, #192]	; (64d8 <main+0xd8>)
+	int h = 0;
+    6418:	9303      	str	r3, [sp, #12]
+    641a:	4694      	mov	ip, r2
+    641c:	9b03      	ldr	r3, [sp, #12]
+    641e:	9f05      	ldr	r7, [sp, #20]
+    6420:	9304      	str	r3, [sp, #16]
+    6422:	9b06      	ldr	r3, [sp, #24]
+    6424:	4463      	add	r3, ip
+    6426:	9307      	str	r3, [sp, #28]
+	uint64_t hmoddiv60 = divfunc(h, 60);
+    6428:	9b01      	ldr	r3, [sp, #4]
+    642a:	213c      	movs	r1, #60	; 0x3c
+    642c:	9804      	ldr	r0, [sp, #16]
+    642e:	4798      	blx	r3
+	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
+    6430:	9b01      	ldr	r3, [sp, #4]
+	uint64_t hmoddiv60 = divfunc(h, 60);
+    6432:	000c      	movs	r4, r1
+	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
+    6434:	2106      	movs	r1, #6
+    6436:	4798      	blx	r3
+	int c = v - (uint32_t)divfunc((59 - hmod60) * v * s, 6000);
+    6438:	233b      	movs	r3, #59	; 0x3b
+    643a:	2632      	movs	r6, #50	; 0x32
+    643c:	1b18      	subs	r0, r3, r4
+    643e:	4370      	muls	r0, r6
+    6440:	3329      	adds	r3, #41	; 0x29
+    6442:	9a01      	ldr	r2, [sp, #4]
+	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
+    6444:	9102      	str	r1, [sp, #8]
+	int c = v - (uint32_t)divfunc((59 - hmod60) * v * s, 6000);
+    6446:	4358      	muls	r0, r3
+    6448:	4924      	ldr	r1, [pc, #144]	; (64dc <main+0xdc>)
+    644a:	4790      	blx	r2
+    644c:	1a35      	subs	r5, r6, r0
+	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
+    644e:	0020      	movs	r0, r4
+    6450:	2364      	movs	r3, #100	; 0x64
+    6452:	4370      	muls	r0, r6
+    6454:	4921      	ldr	r1, [pc, #132]	; (64dc <main+0xdc>)
+    6456:	4358      	muls	r0, r3
+    6458:	9b01      	ldr	r3, [sp, #4]
+    645a:	4798      	blx	r3
+	int f = (uint32_t)divfunc(v * (100 - s), 100);
+    645c:	9b01      	ldr	r3, [sp, #4]
+	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
+    645e:	0004      	movs	r4, r0
+	int f = (uint32_t)divfunc(v * (100 - s), 100);
+    6460:	2164      	movs	r1, #100	; 0x64
+    6462:	2000      	movs	r0, #0
+    6464:	4798      	blx	r3
+	if (d == 0) {
+    6466:	9a02      	ldr	r2, [sp, #8]
+	int f = (uint32_t)divfunc(v * (100 - s), 100);
+    6468:	0003      	movs	r3, r0
+	if (d == 0) {
+    646a:	2a00      	cmp	r2, #0
+    646c:	d022      	beq.n	64b4 <main+0xb4>
+	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
+    646e:	1b34      	subs	r4, r6, r4
+	} else if (d == 1) {
+    6470:	2a01      	cmp	r2, #1
+    6472:	d021      	beq.n	64b8 <main+0xb8>
+	} else if (d == 2) {
+    6474:	2a02      	cmp	r2, #2
+    6476:	d023      	beq.n	64c0 <main+0xc0>
+	} else if (d == 3) {
+    6478:	2a03      	cmp	r2, #3
+    647a:	d023      	beq.n	64c4 <main+0xc4>
+	} else if (d == 4) {
+    647c:	2a04      	cmp	r2, #4
+    647e:	d024      	beq.n	64ca <main+0xca>
+		g = f;
+    6480:	0005      	movs	r5, r0
+	int r = v, g = v, b = v;
+    6482:	0030      	movs	r0, r6
+    6484:	9b04      	ldr	r3, [sp, #16]
+	grb[0] = g;
+    6486:	703d      	strb	r5, [r7, #0]
+    6488:	3305      	adds	r3, #5
+    648a:	9304      	str	r3, [sp, #16]
+	for (;;) {
+		for (int i = 0; i < n; i++) {
+    648c:	9b07      	ldr	r3, [sp, #28]
+	grb[1] = r;
+    648e:	7078      	strb	r0, [r7, #1]
+	grb[2] = b;
+    6490:	70bc      	strb	r4, [r7, #2]
+    6492:	3703      	adds	r7, #3
+		for (int i = 0; i < n; i++) {
+    6494:	429f      	cmp	r7, r3
+    6496:	d1c7      	bne.n	6428 <main+0x28>
+			hsv2rgb(h + i * 5, 100, v, grb + i * 3, divfunc);
+		}
+		ws_led(3 * n, grb, GPIO_OUT1);
+    6498:	23ee      	movs	r3, #238	; 0xee
+    649a:	4a11      	ldr	r2, [pc, #68]	; (64e0 <main+0xe0>)
+    649c:	881b      	ldrh	r3, [r3, #0]
+    649e:	9905      	ldr	r1, [sp, #20]
+    64a0:	203c      	movs	r0, #60	; 0x3c
+    64a2:	4798      	blx	r3
+		if (inkey() == 27)
+    64a4:	23ca      	movs	r3, #202	; 0xca
+    64a6:	881b      	ldrh	r3, [r3, #0]
+    64a8:	4798      	blx	r3
+    64aa:	281b      	cmp	r0, #27
+    64ac:	d010      	beq.n	64d0 <main+0xd0>
+			break;
+		h++;
+    64ae:	9b03      	ldr	r3, [sp, #12]
+    64b0:	3301      	adds	r3, #1
+    64b2:	e7b0      	b.n	6416 <main+0x16>
+		b = f;
+    64b4:	0004      	movs	r4, r0
+    64b6:	e7e4      	b.n	6482 <main+0x82>
+		r = e;
+    64b8:	0020      	movs	r0, r4
+		b = f;
+    64ba:	001c      	movs	r4, r3
+	int r = v, g = v, b = v;
+    64bc:	0035      	movs	r5, r6
+    64be:	e7e1      	b.n	6484 <main+0x84>
+		b = c;
+    64c0:	002c      	movs	r4, r5
+    64c2:	e7fb      	b.n	64bc <main+0xbc>
+		g = e;
+    64c4:	0025      	movs	r5, r4
+	int r = v, g = v, b = v;
+    64c6:	0034      	movs	r4, r6
+    64c8:	e7dc      	b.n	6484 <main+0x84>
+		r = c;
+    64ca:	0028      	movs	r0, r5
+		g = f;
+    64cc:	001d      	movs	r5, r3
+    64ce:	e7fa      	b.n	64c6 <main+0xc6>
+	}
+	return 0;
 }
-    6408:	bd10      	pop	{r4, pc}
+    64d0:	2000      	movs	r0, #0
+    64d2:	b009      	add	sp, #36	; 0x24
+    64d4:	bdf0      	pop	{r4, r5, r6, r7, pc}
+    64d6:	46c0      	nop			; (mov r8, r8)
+    64d8:	0000083c 	.word	0x0000083c
+    64dc:	00001770 	.word	0x00001770
+    64e0:	50010004 	.word	0x50010004
