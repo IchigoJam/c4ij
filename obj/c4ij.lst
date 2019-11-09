@@ -3,198 +3,213 @@ obj/c4ij.axf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000000e4  00006400  00006400  00006400  2**2
+  0 .text         000000f0  00006400  00006400  00006400  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .debug_info   0000035e  00000000  00000000  000064e4  2**0
+  1 .debug_info   0000068a  00000000  00000000  000064f0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  2 .debug_abbrev 00000160  00000000  00000000  00006842  2**0
+  2 .debug_abbrev 0000017d  00000000  00000000  00006b7a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  3 .debug_loc    00000339  00000000  00000000  000069a2  2**0
+  3 .debug_loc    0000010f  00000000  00000000  00006cf7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_aranges 00000020  00000000  00000000  00006cdb  2**0
+  4 .debug_aranges 00000020  00000000  00000000  00006e06  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_ranges 00000048  00000000  00000000  00006cfb  2**0
+  5 .debug_ranges 00000030  00000000  00000000  00006e26  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   000000c5  00000000  00000000  00006d43  2**0
+  6 .debug_line   0000009d  00000000  00000000  00006e56  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_str    000001c2  00000000  00000000  00006e08  2**0
+  7 .debug_str    00000559  00000000  00000000  00006ef3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .comment      0000007f  00000000  00000000  00006fca  2**0
+  8 .comment      0000007f  00000000  00000000  0000744c  2**0
                   CONTENTS, READONLY
-  9 .ARM.attributes 00000031  00000000  00000000  00007049  2**0
+  9 .ARM.attributes 00000031  00000000  00000000  000074cb  2**0
                   CONTENTS, READONLY
- 10 .debug_frame  00000030  00000000  00000000  0000707c  2**2
+ 10 .debug_frame  00000034  00000000  00000000  000074fc  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00006400 <main>:
+int main(int param, int ram, int rom, int (*divfunc)()) {
+	const int sec5 = 5; // last sector of IchigoJam OS
+	const int keymap = 7;
 
-__attribute__ ((section(".main")))
-int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
-	const int v = 50;
-	const int n = 20;
-	uint8_t* grb = (uint8_t*)(ram + 0x800);
-    6400:	2280      	movs	r2, #128	; 0x80
-int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
+	// param #E00 or #F00
+	param = (*(uint8_t*)(sec5 * 0x1000 + 0x100 * keymap) + 0xe) * 0x100;
+    6400:	23ae      	movs	r3, #174	; 0xae
+int main(int param, int ram, int rom, int (*divfunc)()) {
     6402:	b5f0      	push	{r4, r5, r6, r7, lr}
-	uint8_t* grb = (uint8_t*)(ram + 0x800);
-    6404:	0112      	lsls	r2, r2, #4
-int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
-    6406:	b089      	sub	sp, #36	; 0x24
-    6408:	9301      	str	r3, [sp, #4]
-	uint8_t* grb = (uint8_t*)(ram + 0x800);
-    640a:	4694      	mov	ip, r2
-    640c:	000b      	movs	r3, r1
-    640e:	4463      	add	r3, ip
-    6410:	9305      	str	r3, [sp, #20]
-	int h = 0;
-    6412:	2300      	movs	r3, #0
-int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
-    6414:	9106      	str	r1, [sp, #24]
-    6416:	4a30      	ldr	r2, [pc, #192]	; (64d8 <main+0xd8>)
-	int h = 0;
-    6418:	9303      	str	r3, [sp, #12]
-    641a:	4694      	mov	ip, r2
-    641c:	9b03      	ldr	r3, [sp, #12]
-    641e:	9f05      	ldr	r7, [sp, #20]
-    6420:	9304      	str	r3, [sp, #16]
-    6422:	9b06      	ldr	r3, [sp, #24]
-    6424:	4463      	add	r3, ip
-    6426:	9307      	str	r3, [sp, #28]
-	uint64_t hmoddiv60 = divfunc(h, 60);
-    6428:	9b01      	ldr	r3, [sp, #4]
-    642a:	213c      	movs	r1, #60	; 0x3c
-    642c:	9804      	ldr	r0, [sp, #16]
-    642e:	4798      	blx	r3
-	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
-    6430:	9b01      	ldr	r3, [sp, #4]
-	uint64_t hmoddiv60 = divfunc(h, 60);
-    6432:	000c      	movs	r4, r1
-	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
-    6434:	2106      	movs	r1, #6
-    6436:	4798      	blx	r3
-	int c = v - (uint32_t)divfunc((59 - hmod60) * v * s, 6000);
-    6438:	233b      	movs	r3, #59	; 0x3b
-    643a:	2632      	movs	r6, #50	; 0x32
-    643c:	1b18      	subs	r0, r3, r4
-    643e:	4370      	muls	r0, r6
-    6440:	3329      	adds	r3, #41	; 0x29
-    6442:	9a01      	ldr	r2, [sp, #4]
-	int d = divfunc((uint32_t)hmoddiv60, 6) >> 32;
-    6444:	9102      	str	r1, [sp, #8]
-	int c = v - (uint32_t)divfunc((59 - hmod60) * v * s, 6000);
-    6446:	4358      	muls	r0, r3
-    6448:	4924      	ldr	r1, [pc, #144]	; (64dc <main+0xdc>)
-    644a:	4790      	blx	r2
-    644c:	1a35      	subs	r5, r6, r0
-	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
-    644e:	0020      	movs	r0, r4
-    6450:	2364      	movs	r3, #100	; 0x64
-    6452:	4370      	muls	r0, r6
-    6454:	4921      	ldr	r1, [pc, #132]	; (64dc <main+0xdc>)
-    6456:	4358      	muls	r0, r3
-    6458:	9b01      	ldr	r3, [sp, #4]
-    645a:	4798      	blx	r3
-	int f = (uint32_t)divfunc(v * (100 - s), 100);
-    645c:	9b01      	ldr	r3, [sp, #4]
-	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
-    645e:	0004      	movs	r4, r0
-	int f = (uint32_t)divfunc(v * (100 - s), 100);
-    6460:	2164      	movs	r1, #100	; 0x64
-    6462:	2000      	movs	r0, #0
-    6464:	4798      	blx	r3
-	if (d == 0) {
-    6466:	9a02      	ldr	r2, [sp, #8]
-	int f = (uint32_t)divfunc(v * (100 - s), 100);
-    6468:	0003      	movs	r3, r0
-	if (d == 0) {
-    646a:	2a00      	cmp	r2, #0
-    646c:	d022      	beq.n	64b4 <main+0xb4>
-	int e = v - (uint32_t)divfunc(hmod60 * v * s, 6000);
-    646e:	1b34      	subs	r4, r6, r4
-	} else if (d == 1) {
-    6470:	2a01      	cmp	r2, #1
-    6472:	d021      	beq.n	64b8 <main+0xb8>
-	} else if (d == 2) {
-    6474:	2a02      	cmp	r2, #2
-    6476:	d023      	beq.n	64c0 <main+0xc0>
-	} else if (d == 3) {
-    6478:	2a03      	cmp	r2, #3
-    647a:	d023      	beq.n	64c4 <main+0xc4>
-	} else if (d == 4) {
-    647c:	2a04      	cmp	r2, #4
-    647e:	d024      	beq.n	64ca <main+0xca>
-		g = f;
-    6480:	0005      	movs	r5, r0
-	int r = v, g = v, b = v;
-    6482:	0030      	movs	r0, r6
-    6484:	9b04      	ldr	r3, [sp, #16]
-	grb[0] = g;
-    6486:	703d      	strb	r5, [r7, #0]
-    6488:	3305      	adds	r3, #5
-    648a:	9304      	str	r3, [sp, #16]
-	for (;;) {
-		for (int i = 0; i < n; i++) {
-    648c:	9b07      	ldr	r3, [sp, #28]
-	grb[1] = r;
-    648e:	7078      	strb	r0, [r7, #1]
-	grb[2] = b;
-    6490:	70bc      	strb	r4, [r7, #2]
-    6492:	3703      	adds	r7, #3
-		for (int i = 0; i < n; i++) {
-    6494:	429f      	cmp	r7, r3
-    6496:	d1c7      	bne.n	6428 <main+0x28>
-			hsv2rgb(h + i * 5, 100, v, grb + i * 3, divfunc);
+    6404:	b0c5      	sub	sp, #276	; 0x114
+    6406:	9103      	str	r1, [sp, #12]
+	param = (*(uint8_t*)(sec5 * 0x1000 + 0x100 * keymap) + 0xe) * 0x100;
+    6408:	01db      	lsls	r3, r3, #7
+    640a:	781b      	ldrb	r3, [r3, #0]
+    640c:	330e      	adds	r3, #14
+    640e:	021b      	lsls	r3, r3, #8
+    6410:	9302      	str	r3, [sp, #8]
+	IAPRESULT_INVALID_STOP_BIT,
+	IAPRESULT_CODE_READ_PROTECTION_ENABLED,
+};
+
+static inline void enable_irq()		{ __asm volatile ("cpsie i"); }
+static inline void disable_irq()	{ __asm volatile ("cpsid i"); }
+    6412:	b672      	cpsid	i
+	int res;
+	uint8_t buf[0x100];
+
+	// PS/2キーボードマップ変更
+	disable_irq();
+	int sec = flash_blankCheck(6, 6) == IAPRESULT_CMD_SUCCESS ? 6 : 7;
+    6414:	2206      	movs	r2, #6
+    6416:	23e8      	movs	r3, #232	; 0xe8
+    6418:	0011      	movs	r1, r2
+    641a:	881b      	ldrh	r3, [r3, #0]
+    641c:	2035      	movs	r0, #53	; 0x35
+    641e:	4798      	blx	r3
+    6420:	1e43      	subs	r3, r0, #1
+    6422:	4198      	sbcs	r0, r3
+			//memcpy(buf, (void*)PS2_KB_MAP_US, 0x100);
+			//memcpy(buf, PS2_KB_MAP_JP, 0x100);
+			//memcpy(buf, (uint8_t*)(ram + 0xf00), 0x100);
+			memcpy(buf, (uint8_t*)(ram + param), 0x100);
+		} else {
+			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
+    6424:	2780      	movs	r7, #128	; 0x80
+	for (int i = 0; i < 16; i++) {
+    6426:	2400      	movs	r4, #0
+	int sec = flash_blankCheck(6, 6) == IAPRESULT_CMD_SUCCESS ? 6 : 7;
+    6428:	1d86      	adds	r6, r0, #6
+//			src = buf;
 		}
-		ws_led(3 * n, grb, GPIO_OUT1);
-    6498:	23ee      	movs	r3, #238	; 0xee
-    649a:	4a11      	ldr	r2, [pc, #68]	; (64e0 <main+0xe0>)
-    649c:	881b      	ldrh	r3, [r3, #0]
-    649e:	9905      	ldr	r1, [sp, #20]
-    64a0:	203c      	movs	r0, #60	; 0x3c
-    64a2:	4798      	blx	r3
-		if (inkey() == 27)
-    64a4:	23ca      	movs	r3, #202	; 0xca
-    64a6:	881b      	ldrh	r3, [r3, #0]
-    64a8:	4798      	blx	r3
-    64aa:	281b      	cmp	r0, #27
-    64ac:	d010      	beq.n	64d0 <main+0xd0>
-			break;
-		h++;
-    64ae:	9b03      	ldr	r3, [sp, #12]
-    64b0:	3301      	adds	r3, #1
-    64b2:	e7b0      	b.n	6416 <main+0x16>
-		b = f;
-    64b4:	0004      	movs	r4, r0
-    64b6:	e7e4      	b.n	6482 <main+0x82>
-		r = e;
-    64b8:	0020      	movs	r0, r4
-		b = f;
-    64ba:	001c      	movs	r4, r3
-	int r = v, g = v, b = v;
-    64bc:	0035      	movs	r5, r6
-    64be:	e7e1      	b.n	6484 <main+0x84>
-		b = c;
-    64c0:	002c      	movs	r4, r5
-    64c2:	e7fb      	b.n	64bc <main+0xbc>
-		g = e;
-    64c4:	0025      	movs	r5, r4
-	int r = v, g = v, b = v;
-    64c6:	0034      	movs	r4, r6
-    64c8:	e7dc      	b.n	6484 <main+0x84>
-		r = c;
-    64ca:	0028      	movs	r0, r5
-		g = f;
-    64cc:	001d      	movs	r5, r3
-    64ce:	e7fa      	b.n	64c6 <main+0xc6>
+		flash_prepare(sec, sec);
+//		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), src, 0x100); // 256byteずつ
+		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
+    642a:	0133      	lsls	r3, r6, #4
+    642c:	9301      	str	r3, [sp, #4]
+			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
+    642e:	007f      	lsls	r7, r7, #1
+    6430:	23e6      	movs	r3, #230	; 0xe6
+    6432:	881b      	ldrh	r3, [r3, #0]
+		if (i == keymap) { // keymap のみ変更
+    6434:	2c07      	cmp	r4, #7
+    6436:	d155      	bne.n	64e4 <main+0xe4>
+			memcpy(buf, (uint8_t*)(ram + param), 0x100);
+    6438:	9a02      	ldr	r2, [sp, #8]
+    643a:	9903      	ldr	r1, [sp, #12]
+    643c:	1851      	adds	r1, r2, r1
+			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
+    643e:	003a      	movs	r2, r7
+    6440:	a804      	add	r0, sp, #16
+    6442:	4798      	blx	r3
+		flash_prepare(sec, sec);
+    6444:	23e8      	movs	r3, #232	; 0xe8
+    6446:	0032      	movs	r2, r6
+    6448:	881b      	ldrh	r3, [r3, #0]
+    644a:	0031      	movs	r1, r6
+    644c:	2032      	movs	r0, #50	; 0x32
+    644e:	4798      	blx	r3
+		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
+    6450:	9b01      	ldr	r3, [sp, #4]
+    6452:	a904      	add	r1, sp, #16
+    6454:	18e2      	adds	r2, r4, r3
+    6456:	23ea      	movs	r3, #234	; 0xea
+    6458:	881b      	ldrh	r3, [r3, #0]
+    645a:	0212      	lsls	r2, r2, #8
+    645c:	001d      	movs	r5, r3
+    645e:	2033      	movs	r0, #51	; 0x33
+    6460:	003b      	movs	r3, r7
+	for (int i = 0; i < 16; i++) {
+    6462:	3401      	adds	r4, #1
+		flash_copyRAMtoFlash((uint8_t*)(sec * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
+    6464:	47a8      	blx	r5
+	for (int i = 0; i < 16; i++) {
+    6466:	2c10      	cmp	r4, #16
+    6468:	d1e2      	bne.n	6430 <main+0x30>
 	}
-	return 0;
+
+	// erase sector5
+	flash_prepare(sec5, sec5);
+    646a:	2205      	movs	r2, #5
+    646c:	34d8      	adds	r4, #216	; 0xd8
+    646e:	8823      	ldrh	r3, [r4, #0]
+    6470:	0011      	movs	r1, r2
+    6472:	2032      	movs	r0, #50	; 0x32
+    6474:	4798      	blx	r3
+	flash_erase(sec5, sec5);
+    6476:	2205      	movs	r2, #5
+    6478:	8823      	ldrh	r3, [r4, #0]
+    647a:	24a0      	movs	r4, #160	; 0xa0
+    647c:	0011      	movs	r1, r2
+    647e:	2034      	movs	r0, #52	; 0x34
+    6480:	4798      	blx	r3
+    6482:	9b01      	ldr	r3, [sp, #4]
+    6484:	01e4      	lsls	r4, r4, #7
+    6486:	021b      	lsls	r3, r3, #8
+    6488:	9301      	str	r3, [sp, #4]
+
+	// copy sec -> sector5
+	for (int i = 0; i < 16; i++) {
+		memcpy(buf, (void*)(sec * 0x1000 + 0x100 * i), 0x100);
+    648a:	9b01      	ldr	r3, [sp, #4]
+    648c:	4a17      	ldr	r2, [pc, #92]	; (64ec <main+0xec>)
+    648e:	a804      	add	r0, sp, #16
+    6490:	1899      	adds	r1, r3, r2
+    6492:	23e6      	movs	r3, #230	; 0xe6
+    6494:	2280      	movs	r2, #128	; 0x80
+    6496:	1909      	adds	r1, r1, r4
+    6498:	881b      	ldrh	r3, [r3, #0]
+    649a:	0052      	lsls	r2, r2, #1
+    649c:	4798      	blx	r3
+		flash_prepare(sec5, sec5);
+    649e:	25e8      	movs	r5, #232	; 0xe8
+    64a0:	2205      	movs	r2, #5
+    64a2:	882b      	ldrh	r3, [r5, #0]
+    64a4:	0011      	movs	r1, r2
+    64a6:	2032      	movs	r0, #50	; 0x32
+    64a8:	4798      	blx	r3
+		flash_copyRAMtoFlash((uint8_t*)(sec5 * 0x1000 + 0x100 * i), buf, 0x100); // 256byteずつ
+    64aa:	23ea      	movs	r3, #234	; 0xea
+    64ac:	881b      	ldrh	r3, [r3, #0]
+    64ae:	0022      	movs	r2, r4
+    64b0:	001f      	movs	r7, r3
+    64b2:	2380      	movs	r3, #128	; 0x80
+    64b4:	a904      	add	r1, sp, #16
+    64b6:	005b      	lsls	r3, r3, #1
+    64b8:	2033      	movs	r0, #51	; 0x33
+    64ba:	47b8      	blx	r7
+	for (int i = 0; i < 16; i++) {
+    64bc:	23c0      	movs	r3, #192	; 0xc0
+    64be:	3401      	adds	r4, #1
+    64c0:	34ff      	adds	r4, #255	; 0xff
+    64c2:	01db      	lsls	r3, r3, #7
+    64c4:	429c      	cmp	r4, r3
+    64c6:	d1e0      	bne.n	648a <main+0x8a>
+	}
+
+	// erase sec
+	flash_prepare(sec, sec);
+    64c8:	882b      	ldrh	r3, [r5, #0]
+    64ca:	0032      	movs	r2, r6
+    64cc:	0031      	movs	r1, r6
+    64ce:	2032      	movs	r0, #50	; 0x32
+    64d0:	4798      	blx	r3
+	res = flash_erase(sec, sec);
+    64d2:	882b      	ldrh	r3, [r5, #0]
+    64d4:	0032      	movs	r2, r6
+    64d6:	0031      	movs	r1, r6
+    64d8:	2034      	movs	r0, #52	; 0x34
+    64da:	4798      	blx	r3
+static inline void enable_irq()		{ __asm volatile ("cpsie i"); }
+    64dc:	b662      	cpsie	i
+
+	enable_irq();
+	return param;
 }
-    64d0:	2000      	movs	r0, #0
-    64d2:	b009      	add	sp, #36	; 0x24
-    64d4:	bdf0      	pop	{r4, r5, r6, r7, pc}
-    64d6:	46c0      	nop			; (mov r8, r8)
-    64d8:	0000083c 	.word	0x0000083c
-    64dc:	00001770 	.word	0x00001770
-    64e0:	50010004 	.word	0x50010004
+    64de:	9802      	ldr	r0, [sp, #8]
+    64e0:	b045      	add	sp, #276	; 0x114
+    64e2:	bdf0      	pop	{r4, r5, r6, r7, pc}
+			memcpy(buf, (uint8_t*)(sec5 * 0x1000 + 0x100 * i), 0x100);
+    64e4:	0021      	movs	r1, r4
+    64e6:	3150      	adds	r1, #80	; 0x50
+    64e8:	0209      	lsls	r1, r1, #8
+    64ea:	e7a8      	b.n	643e <main+0x3e>
+    64ec:	ffffb000 	.word	0xffffb000

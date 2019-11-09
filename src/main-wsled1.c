@@ -54,18 +54,4 @@ int main(int param, int ram, int rom, uint64_t (*divfunc)()) {
 	hsv2rgb(h, 100, v, grb, divfunc);
 	ws_led(3 | ((n - 1) << 16), grb, GPIO_OUT1);
 	return 0;
-	/*
-	
-	int h = 0;
-	for (;;) {
-		for (int i = 0; i < n; i++) {
-			hsv2rgb(h + i * 5, 100, v, grb + i * 3, divfunc);
-		}
-		ws_led(3 * n, grb, GPIO_OUT1);
-		if (inkey() == 32)
-			break;
-		h++;
-	}
-	return 0;
- */
 }
