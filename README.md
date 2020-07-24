@@ -1,4 +1,4 @@
-# C_for_IchigoJam
+# C for IchigoJam
 
 c4ij - C language for IchigoJam!
 
