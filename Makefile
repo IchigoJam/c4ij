@@ -98,7 +98,7 @@ ALL_ASFLAGS = -mcpu=$(CPU) $(THUMBIW) -I. -x assembler-with-cpp $(ASFLAGS)
 BAS2BIN_FLAGS = # --nopadding
 
 #all: bas2bin build size
-all: build size
+all: build size write
 
 ifeq ($(OUTPUT),hex)
 build: axf hex lst sym
@@ -175,21 +175,26 @@ clean:
 #	rm $(BAS2BIN)
 	rm -f -r $(OBJDIR) | exit 0
 
-dasm:
-	$(OBJDUMP) -D -bbinary -marm $(PROJECT).bin -Mforce-thumb2 > asm.s
-	cat asm.s
-	@echo 'see ./asm.s'
+dasm: disasm
+
+disasm:
+	$(OBJDUMP) -D -bbinary -marm $(PROJECT).bin -Mforce-thumb2 > $(OBJDIR)/asm.s
+	cat $(OBJDIR)/asm.s
+	@echo 'see $(OBJDIR)/asm.s'
 #	cat $(PROJECT).bin >> $(OBJDIR)/ij.bin
 #	$(LPC21ISP) -control -bin $(OBJDIR)/ij.bin $(USBSERIAL) 115200 1200
 
+sections:
+	$(OBJDUMP) -x $(PROJECT).axf
+
 write: build
-	echo "1 @ARUN:POKE#700,3,180,4,73,8,104,64,28,0,209,3,73,1,49,140,70,3,188,96,71,0,100,0,0,0,116,0,0:?USR(#700):END" > entry.bas
-	$(BAS2BIN) entry.bas entry.bin
-	cat entry.bin obj/c4ij.bin > sector6.bin
-	$(LPC21ISP) -control -bin -sector6 sector6.bin $(USBSERIAL) 115200 1200
+	echo "1 @ARUN:POKE#700,3,180,4,73,8,104,64,28,0,209,3,73,1,49,140,70,3,188,96,71,0,100,0,0,0,116,0,0:?USR(#700):END" > $(OBJDIR)/entry.bas
+	$(BAS2BIN) $(OBJDIR)/entry.bas $(OBJDIR)/entry.bin
+	cat $(OBJDIR)/entry.bin $(OBJDIR)/c4ij.bin > $(OBJDIR)/sector6.bin
+	$(LPC21ISP) -control -bin -sector6 $(OBJDIR)/sector6.bin $(USBSERIAL) 115200 1200
 
 poke: build
-	$(BIN2BAS) $(PROJECT).bin > main.bas
-	cat main.bas
+	$(BIN2BAS) $(PROJECT).bin > $(OBJDIR)/main.bas
+	cat $(OBJDIR)/main.bas
 
 -include $(shell mkdir $(OBJDIR) 2>/dev/null) $(wildcard $(OBJDIR)/*.d)
